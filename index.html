@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AvatradeCM - Plateforme d'investissement premium au Cameroun</title>
+    <link rel="icon" href="https://th.bing.com/th/id/OIP.CcC1GVTDlFu-ZDkmVWfVGgHaEU?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: '#f0fdf4',
+                100: '#dcfce7',
+                200: '#bbf7d0',
+                300: '#86efac',
+                400: '#4ade80',
+                500: '#22c55e',
+                600: '#16a34a',
+                700: '#15803d',
+                800: '#166534',
+                900: '#14532d',
+              },
+              dark: {
+                900: '#0a160f',
+                800: '#0f1e13',
+                700: '#142918',
+              }
+            },
+            fontFamily: {
+              sans: ['"Inter"', 'sans-serif'],
+              display: ['"Poppins"', 'sans-serif'],
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'fade-in': 'fadeIn 0.5s ease-out',
+              'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'wave': 'wave 2s linear infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(20px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              wave: {
+                '0%': { transform: 'rotate(0deg)' },
+                '10%': { transform: 'rotate(14deg)' },
+                '20%': { transform: 'rotate(-8deg)' },
+                '30%': { transform: 'rotate(14deg)' },
+                '40%': { transform: 'rotate(-4deg)' },
+                '50%': { transform: 'rotate(10deg)' },
+                '60%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(0deg)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #22c55e;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #16a34a;
+        }
+        
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        /* Hero section diagonal cut */
+        .hero-cut {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 80px), 0 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-cut {
+                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%);
+            }
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #22c55e 0%, #86efac 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Card hover effect */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Notification animation */
+        .notification-slide {
+            animation: slideInOut 5s forwards;
+        }
+        
+        @keyframes slideInOut {
+            0% { transform: translateY(-100%) translateX(-50%); opacity: 0; }
+            10% { transform: translateY(0) translateX(-50%); opacity: 1; }
+            90% { transform: translateY(0) translateX(-50%); opacity: 1; }
+            100% { transform: translateY(-100%) translateX(-50%); opacity: 0; }
+        }
+        
+        /* Floating animation */
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Tab content animation */
+        .tab-content {
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        /* Glow effect */
+        .glow-effect {
+            position: relative;
+        }
+        
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(34, 197, 94, 0.3) 0%, transparent 70%);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-effect:hover::after {
+            opacity: 1;
+        }
+        /* Chat specific styles */
+#chatMessages {
+    scrollbar-width: thin;
+    scrollbar-color: #22c55e #f1f1f1;
+}
+
+#chatMessages::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chatMessages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#chatMessages::-webkit-scrollbar-thumb {
+    background: #22c55e;
+    border-radius: 10px;
+}
+
+.message .bg-primary-600 {
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.message .bg-gray-100 {
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+        
+        /* Custom checkbox */
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .custom-checkbox:checked {
+            background-color: #22c55e;
+            border-color: #22c55e;
+        }
+        
+        .custom-checkbox:checked::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Wave hand animation */
+        .wave-hand {
+            display: inline-block;
+            animation: wave 2s linear infinite;
+            transform-origin: 70% 70%;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 antialiased">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.FyXpBVeNM_hPtQ2P6C56LQAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AvatradeCM" class="h-10 w-10 rounded-lg object-cover">
+                <span class="text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">AvatradeCM</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div id="authButtons" class="flex space-x-3">
+                    <button id="loginBtn" class="px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all shadow hover:shadow-md flex items-center space-x-2">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Connexion</span>
+                    </button>
+                    <button id="registerBtn" class="px-5 py-2.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all shadow hover:shadow-md flex items-center space-x-2">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Inscription</span>
+                    </button>
+                </div>
+                <div id="userBalance" class="hidden items-center bg-primary-50 px-4 py-2 rounded-lg">
+                    <span class="font-medium text-primary-800 mr-2">Solde:</span>
+                    <span class="font-bold text-primary-700">0 XAF</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="min-h-screen pb-20">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-primary-800 to-dark-900 text-white hero-cut">
+            <div class="container mx-auto px-4 py-24 md:py-32 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0 animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
+                        Investissez intelligemment, 
+                        <span class="gradient-text">gagnez quotidiennement</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-primary-100 mb-8 max-w-lg">
+                        Recevez jusqu'à 40% de rendement sur votre investissement en seulement 24h. 
+                        Retraits instantanés sur Mobile Money.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <button id="investNowBtn" class="px-8 py-4 bg-white text-primary-700 font-bold rounded-xl hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl glow-effect flex items-center justify-center space-x-2">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Commencer à investir</span>
+                        </button>
+                        <button class="px-8 py-4 bg-transparent border-2 border-white/30 text-white rounded-xl hover:border-white/60 transition-all flex items-center justify-center space-x-2">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Voir la démo</span>
+                        </button>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-4">
+                        <div class="flex -space-x-2">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.W7dLoN2EFv3LiIxba3p-cwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                            <img src="https://tse4.mm.bing.net/th/id/OIP.Q8YvJB5kp1wjBs5JnrZW2gHaHP?pid=ImgDet&w=191&h=186&c=7&o=7&rm=3" class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                            <img src="https://tse1.explicit.bing.net/th/id/OIP.hS1CHk8UFcWq_SH_ttfFJAHaFc?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                        </div>
+                        <div>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="text-sm text-primary-200">5,000+ investisseurs satisfaits</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center relative">
+                    <div class="relative">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.x_5yPMQV61cNpPfb1L1VmAHaQB?r=0&w=640&h=1385&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Mobile App" class="h-80 md:h-96 animate-float">
+                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl animate-slide-up">
+                            <div class="text-primary-700 font-bold text-lg">+40%</div>
+                            <div class="text-gray-600 text-sm">Retour quotidien</div>
+                        </div>
+                        <div class="absolute -top-6 -right-6 bg-white p-4 rounded-xl shadow-xl animate-slide-up" style="animation-delay: 0.2s">
+                            <div class="text-primary-700 font-bold text-lg">2,000 XAF</div>
+                            <div class="text-gray-600 text-sm">Minimum</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-12 bg-white relative z-10 -mt-1">
+            <div class="container mx-auto px-4">
+                <div class="bg-white rounded-2xl shadow-lg p-6 grid grid-cols-2 md:grid-cols-4 gap-6 -mt-16">
+                    <div class="text-center p-4 animate-slide-up" style="animation-delay: 0.1s">
+                        <div class="text-3xl md:text-4xl font-display font-bold text-primary-600 mb-2">15K+</div>
+                        <p class="text-gray-600">Investisseurs actifs</p>
+                    </div>
+                    <div class="text-center p-4 animate-slide-up" style="animation-delay: 0.2s">
+                        <div class="text-3xl md:text-4xl font-display font-bold text-primary-600 mb-2">250M+</div>
+                        <p class="text-gray-600">XAF investis</p>
+                    </div>
+                    <div class="text-center p-4 animate-slide-up" style="animation-delay: 0.3s">
+                        <div class="text-3xl md:text-4xl font-display font-bold text-primary-600 mb-2">24h</div>
+                        <p class="text-gray-600">Retours rapides</p>
+                    </div>
+                    <div class="text-center p-4 animate-slide-up" style="animation-delay: 0.4s">
+                        <div class="text-3xl md:text-4xl font-display font-bold text-primary-600 mb-2">98%</div>
+                        <p class="text-gray-600">Satisfaction client</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 animate-fade-in">
+                    <span class="inline-block px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-4">Comment ça marche</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">Gagnez de l'argent en 3 étapes simples</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Notre processus simplifié vous permet de commencer à gagner en moins de 5 minutes</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all card-hover animate-slide-up">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6 text-primary-600 text-2xl">
+                            <span class="flex items-center justify-center w-12 h-12 bg-primary-500 text-white rounded-full font-bold">1</span>
+                        </div>
+                        <h3 class="text-xl font-display font-semibold mb-3">Créez votre compte</h3>
+                        <p class="text-gray-600">Inscription rapide en 2 minutes avec votre numéro de téléphone et quelques informations de base.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all card-hover animate-slide-up" style="animation-delay: 0.1s">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6 text-primary-600 text-2xl">
+                            <span class="flex items-center justify-center w-12 h-12 bg-primary-500 text-white rounded-full font-bold">2</span>
+                        </div>
+                        <h3 class="text-xl font-display font-semibold mb-3">Faites un dépôt</h3>
+                        <p class="text-gray-600">Déposez un minimum de 2000 FCFA via Mobile Money ou Orange Money en quelques clics.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all card-hover animate-slide-up" style="animation-delay: 0.2s">
+                        <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6 text-primary-600 text-2xl">
+                            <span class="flex items-center justify-center w-12 h-12 bg-primary-500 text-white rounded-full font-bold">3</span>
+                        </div>
+                        <h3 class="text-xl font-display font-semibold mb-3">Recevez vos gains</h3>
+                        <p class="text-gray-600">Obtenez jusqu'à 40% de rendement après 24 heures directement sur votre compte.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Investment Calculator Section -->
+        <section class="py-16 bg-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://tse1.mm.bing.net/th/id/OIP._fX_G1an-_OMEW1af5gMqQHaEL?r=0&rs=1&pid=ImgDetMain&o=7&rm=3')] bg-cover bg-center opacity-10"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-16 animate-fade-in">
+                    <span class="inline-block px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-4">Simulateur</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">Calculez vos gains potentiels</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Découvrez combien vous pourriez gagner avec notre plateforme</p>
+                </div>
+                <div class="max-w-md mx-auto bg-white rounded-2xl shadow-xl overflow-hidden animate-slide-up">
+                    <div class="bg-gradient-to-r from-primary-600 to-primary-400 p-6 text-white">
+                        <h3 class="text-xl font-display font-bold">Simulateur d'investissement</h3>
+                        <p class="opacity-90">Estimez vos rendements en temps réel</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <label for="investmentAmount" class="block text-gray-700 font-medium mb-3">Montant à investir (FCFA)</label>
+                            <input type="range" id="investmentAmount" min="2000" max="1000000" step="1000" value="2000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mb-3">
+                            <div class="flex justify-between text-sm text-gray-600">
+                                <span>2,000</span>
+                                <span id="currentAmount" class="font-bold text-primary-600">2,000</span>
+                                <span>1,000,000</span>
+                            </div>
+                        </div>
+                        <div class="bg-primary-50 border border-primary-100 rounded-xl p-5 mb-6 text-center">
+                            <p class="text-gray-600 mb-1">Retour après 24 heures</p>
+                            <p class="text-3xl font-bold text-primary-700"><span id="returnAmount">2,800</span> FCFA</p>
+                            <div class="mt-2 text-sm text-primary-600 flex items-center justify-center">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                <span>40% de rendement</span>
+                            </div>
+                        </div>
+                        <button id="calculatorInvestBtn" class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl transition-all shadow hover:shadow-md glow-effect">
+                            Investir ce montant
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 animate-fade-in">
+                    <span class="inline-block px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-4">Témoignages</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">Ce que nos investisseurs disent</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Découvrez les expériences réelles de nos membres</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all card-hover animate-slide-up">
+                        <div class="flex items-center mb-6">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.ICjD4rY2294AszAeqmAuNQHaKv?pid=ImgDet&w=191&h=276&c=7&o=7&rm=3" alt="Jean M." class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-semibold">Jean M.</h4>
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">"J'ai commencé avec 5,000 FCFA et en une semaine j'ai déjà retiré 14,000 FCFA. Les retraits sont instantanés et le support client est très réactif!"</p>
+                        <div class="text-sm text-gray-500 flex items-center">
+                            <i class="fas fa-check-circle text-primary-500 mr-2"></i>
+                            <span>Investisseur depuis 3 mois</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all card-hover animate-slide-up" style="animation-delay: 0.1s">
+                        <div class="flex items-center mb-6">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.52HVnjWAQTftEQ_EXgYCcAHaE6?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Aïcha K." class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-semibold">Aïcha K.</h4>
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">"Le système de parrainage est génial. J'ai gagné plus de 20,000 FCFA grâce à mes filleuls. La plateforme est très intuitive et sécurisée."</p>
+                        <div class="text-sm text-gray-500 flex items-center">
+                            <i class="fas fa-check-circle text-primary-500 mr-2"></i>
+                            <span>Investisseur depuis 5 mois</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-all card-hover animate-slide-up" style="animation-delay: 0.2s">
+                        <div class="flex items-center mb-6">
+                            <img src="https://tse3.mm.bing.net/th/id/OIP.E8MP3C2029ItrN9QXcZHpAHaIF?pid=ImgDet&w=191&h=208&c=7&o=7&rm=3" alt="Paul B." class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-semibold">Paul B.</h4>
+                                <div class="flex text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">"Je recommande AvatradeCM à tous mes amis. Les rendements sont réguliers et le processus est transparent. J'ai multiplié mon capital par 3 en 2 mois."</p>
+                        <div class="text-sm text-gray-500 flex items-center">
+                            <i class="fas fa-check-circle text-primary-500 mr-2"></i>
+                            <span>Investisseur depuis 6 mois</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16 animate-fade-in">
+                    <span class="inline-block px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-4">FAQ</span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">Questions fréquentes</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Trouvez des réponses aux questions les plus courantes</p>
+                </div>
+                <div class="max-w-3xl mx-auto">
+                    <div class="mb-4 border border-gray-200 rounded-xl overflow-hidden animate-fade-in">
+                        <button class="faq-question flex justify-between items-center w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition-all">
+                            <span class="font-semibold text-lg">Quel est le montant minimum d'investissement?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            Le montant minimum pour commencer à investir est de 2,000 FCFA. Vous pouvez investir autant que vous le souhaitez au-dessus de ce montant. Plus vous investissez, plus vos gains potentiels sont importants.
+                        </div>
+                    </div>
+                    <div class="mb-4 border border-gray-200 rounded-xl overflow-hidden animate-fade-in" style="animation-delay: 0.1s">
+                        <button class="faq-question flex justify-between items-center w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition-all">
+                            <span class="font-semibold text-lg">Quand est-ce que je reçois mes gains?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            Vos gains sont calculés après chaque cycle de 24 heures à partir du moment de votre investissement. Vous pouvez les retirer immédiatement ou les réinvestir pour des rendements composés encore plus élevés.
+                        </div>
+                    </div>
+                    <div class="mb-4 border border-gray-200 rounded-xl overflow-hidden animate-fade-in" style="animation-delay: 0.2s">
+                        <button class="faq-question flex justify-between items-center w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition-all">
+                            <span class="font-semibold text-lg">Comment fonctionne le programme de parrainage?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            Lorsque vous parrainez un ami et qu'il effectue son premier investissement, vous recevez 30% du montant investi directement sur votre solde disponible. Plus vous parrainez d'amis, plus vos gains potentiels sont importants.
+                        </div>
+                    </div>
+                    <div class="mb-4 border border-gray-200 rounded-xl overflow-hidden animate-fade-in" style="animation-delay: 0.3s">
+                        <button class="faq-question flex justify-between items-center w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition-all">
+                            <span class="font-semibold text-lg">Quel est le montant minimum de retrait?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            Le montant minimum que vous pouvez retirer est de 3,000 FCFA. Les retraits sont traités dans les 24 heures et crédités sur votre Mobile Money ou Orange Money, selon votre choix.
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-xl overflow-hidden animate-fade-in" style="animation-delay: 0.4s">
+                        <button class="faq-question flex justify-between items-center w-full text-left p-6 bg-gray-50 hover:bg-gray-100 transition-all">
+                            <span class="font-semibold text-lg">Est-ce que mes fonds sont sécurisés?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-gray-600 hidden">
+                            Absolument. Nous utilisons des technologies de cryptage de pointe pour protéger vos informations et vos transactions. De plus, nous ne stockons jamais vos informations de paiement sur nos serveurs.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-gradient-to-br from-primary-700 to-primary-900 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-6 animate-fade-in">Prêt à faire croître votre argent?</h2>
+                <p class="text-xl text-primary-100 max-w-2xl mx-auto mb-8 animate-fade-in">Rejoignez des milliers d'investisseurs qui font déjà des profits avec AvatradeCM</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 animate-slide-up">
+                    <button id="ctaInvestBtn" class="px-8 py-4 bg-white text-primary-700 font-bold rounded-xl hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl glow-effect">
+                        Commencer avec 2,000 FCFA
+                    </button>
+                    <button class="px-8 py-4 bg-transparent border-2 border-white/30 text-white rounded-xl hover:border-white/60 transition-all">
+                        Parler à un conseiller
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Content (Hidden by default) -->
+        <div id="dashboardContent" class="hidden">
+            <!-- Home Tab -->
+            <div id="homeTab" class="tab-content active-tab p-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex items-center justify-between mb-8">
+                        <h2 class="text-2xl font-display font-bold text-gray-900">Tableau de bord</h2>
+                        <div class="flex items-center space-x-2 bg-primary-50 px-4 py-2 rounded-lg">
+                            <span class="text-primary-700 font-medium">Solde:</span>
+                            <span class="font-bold text-primary-800" id="availableBalanceHeader">0 FCFA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-chart-line text-primary-500 mr-2"></i>
+                                <span>Investissement actif</span>
+                            </h3>
+                            <div class="text-center py-4">
+                                <div class="text-4xl font-bold text-primary-600 mb-2" id="activeInvestment">0 FCFA</div>
+                                <div class="text-gray-600">Montant investi</div>
+                            </div>
+                            <div class="text-center py-4 border-t border-gray-200">
+                                <div class="text-3xl font-bold mb-2 font-mono" id="countdownTimer">24:00:00</div>
+                                <div class="text-gray-600">Temps restant</div>
+                            </div>
+                            <div class="text-center py-4 border-t border-gray-200">
+                                <div class="text-2xl font-bold text-primary-600 mb-2" id="expectedReturn">0 FCFA</div>
+                                <div class="text-gray-600">Gain estimé</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-plus-circle text-primary-500 mr-2"></i>
+                                <span>Nouvel investissement</span>
+                            </h3>
+                            <div class="mb-4">
+                                <label for="investAmount" class="block text-gray-700 mb-2">Montant (FCFA)</label>
+                                <input type="number" id="investAmount" min="2000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Minimum 2,000">
+                            </div>
+                            <div class="mb-4 p-4 bg-primary-50 border border-primary-100 rounded-lg">
+                                <p class="text-gray-600 mb-1">Profit estimé après 24h</p>
+                                <p class="text-xl font-bold text-primary-700" id="estimatedReturn">0 FCFA</p>
+                                <div class="mt-1 text-sm text-primary-600 flex items-center">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    <span>40% de rendement</span>
+                                </div>
+                            </div>
+                            <button id="startInvestmentBtn" class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-lg transition-all shadow hover:shadow-md glow-effect">
+                                <i class="fas fa-play-circle mr-2"></i>Démarrer l'investissement
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-wallet text-primary-500 mr-2"></i>
+                                <span>Total investi</span>
+                            </h3>
+                            <div class="text-2xl font-bold text-primary-600" id="totalInvested">0 FCFA</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-money-bill-wave text-primary-500 mr-2"></i>
+                                <span>Total retiré</span>
+                            </h3>
+                            <div class="text-2xl font-bold text-primary-600" id="totalWithdrawn">0 FCFA</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-coins text-primary-500 mr-2"></i>
+                                <span>Solde disponible</span>
+                            </h3>
+                            <div class="text-2xl font-bold text-primary-600" id="availableBalance">0 FCFA</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl shadow-md mb-8">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-exchange-alt text-primary-500 mr-2"></i>
+                            <span>Dernières transactions</span>
+                        </h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="border-b border-gray-200">
+                                        <th class="py-3 text-left text-gray-600 font-medium">Date</th>
+                                        <th class="py-3 text-left text-gray-600 font-medium">Type</th>
+                                        <th class="py-3 text-left text-gray-600 font-medium">Montant</th>
+                                        <th class="py-3 text-left text-gray-600 font-medium">Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactionsList">
+                                    <!-- Transactions will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Tab -->
+            <div id="teamTab" class="tab-content p-4">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-display font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-users text-primary-500 mr-3"></i>
+                        <span>Programme de parrainage</span>
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-hand-holding-usd text-primary-500 mr-2"></i>
+                                <span>Gains disponibles</span>
+                            </h3>
+                            <div class="text-3xl font-bold text-primary-600" id="referralEarnings">0 FCFA</div>
+                            <p class="text-gray-600 mt-2 text-sm">30% du dépôt de chaque filleul</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-user-check text-primary-500 mr-2"></i>
+                                <span>Filleuls actifs</span>
+                            </h3>
+                            <div class="text-3xl font-bold text-primary-600" id="activeReferrals">0</div>
+                            <p class="text-gray-600 mt-2 text-sm">Nombre de filleuls ayant investi</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-md">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                <i class="fas fa-trophy text-primary-500 mr-2"></i>
+                                <span>Total gagné</span>
+                            </h3>
+                            <div class="text-3xl font-bold text-primary-600" id="totalReferralEarnings">0 FCFA</div>
+                            <p class="text-gray-600 mt-2 text-sm">Depuis votre inscription</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl shadow-md mb-8">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-user-plus text-primary-500 mr-2"></i>
+                            <span>Votre code de parrainage</span>
+                        </h3>
+                        <div class="flex items-center">
+                            <div class="p-3 bg-gray-100 rounded-lg font-mono text-lg font-bold" id="referralCode">ABCD</div>
+                            <button id="copyReferralBtn" class="ml-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all flex items-center">
+                                <i class="fas fa-copy mr-2"></i>Copier
+                            </button>
+                        </div>
+                        <p class="text-gray-600 mt-4">
+                            Partagez ce code avec vos amis et gagnez 30% de leur premier investissement! 
+                            <span class="block mt-1 text-primary-600 font-medium">Votre lien de parrainage: <span id="referralLink" class="underline">https://avatradecm.com?ref=ABCD</span></span>
+                        </p>
+                        <div class="mt-4 flex space-x-3">
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all flex items-center" onclick="window.open('https://www.facebook.com/index.php/')">
+                                <i class="fab fa-facebook-f mr-2" ></i>Partager
+                            </button>
+                            <button class="px-4 py-2 bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-all flex items-center" onclick="window.open('https://twitter.com/')">
+                                <i class="fab fa-twitter mr-2"></i>Tweeter
+                            </button>
+                            <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all flex items-center" onclick="window.open('https://wa.me/')">
+                                <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl shadow-md">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-list text-primary-500 mr-2"></i>
+                            <span>Vos filleuls</span>
+                        </h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="border-b border-gray-200">
+                                        <th class="py-3 text-left text-gray-600 font-medium">Nom</th>
+                                        <th class="py-3 text-left text-gray-600 font-medium">Date</th>
+                                        <th class="py-3 text-left text-gray-600 font-medium">Investissement</th>
+                                        <th class="py-3 text-left text-gray-600 font-medium">Votre gain</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="referralsList">
+                                    <!-- Referrals will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+           <div id="assistanceTab" class="tab-content p-4">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl font-display font-bold text-gray-900 mb-6 flex items-center">
+            <i class="fas fa-headset text-primary-500 mr-3"></i>
+            <span>Support client</span>
+        </h2>
+        
+        <div class="bg-white p-6 rounded-2xl shadow-md mb-6">
+            <div id="chatMessages" class="h-64 overflow-y-auto mb-4 border-b border-gray-200 pb-4">
+                <!-- Initial support message -->
+                <div class="message mb-3 flex">
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center text-primary-600">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-xs">
+                        <p class="text-sm">Bonjour! Comment pouvons-nous vous aider aujourd'hui?</p>
+                        <p class="text-xs text-gray-500 text-right mt-1">Support - 10:25</p>
+                    </div>
+                </div>
+                <!-- User messages will appear here -->
+            </div>
+            
+            <div class="flex items-center">
+                <input type="text" id="chatInput" placeholder="Tapez votre message..." class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                <label for="fileUpload" class="ml-2 p-3 bg-gray-100 rounded-lg cursor-pointer hover:bg-gray-200 text-gray-600">
+                    <i class="fas fa-paperclip"></i>
+                    <input type="file" id="fileUpload" class="hidden">
+                </label>
+                <button id="sendMessageBtn" class="ml-2 px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <button id="logoutBtn" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all flex items-center mx-auto">
+                <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+            </button>
+        </div>
+    </div>
+</div>
+            
+            <!-- Profile Tab -->
+            <div id="profileTab" class="tab-content p-4">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-display font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-user-circle text-primary-500 mr-3"></i>
+                        <span>Profil</span>
+                    </h2>
+                    
+                    <div class="bg-white p-6 rounded-2xl shadow-md mb-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mr-4 text-primary-600 text-2xl">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold" id="profileName">Nom Utilisateur</h3>
+                                <p class="text-gray-600" id="profilePhone">6XXXXXXXX</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Date d'inscription</label>
+                                <div class="p-3 bg-gray-100 rounded-lg" id="joinDate">01 Jan 2023</div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Adresse email</label>
+                                <input type="email" id="profileEmail" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Votre email" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 mb-6">
+                            <button id="depositBtn" class="flex-1 py-3 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-700 transition-all shadow hover:shadow-md glow-effect flex items-center justify-center space-x-2">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Déposer</span>
+                            </button>
+                            <button id="withdrawBtn" class="flex-1 py-3 bg-gray-900 text-white font-bold rounded-lg hover:bg-gray-800 transition-all shadow hover:shadow-md flex items-center justify-center space-x-2">
+                                <i class="fas fa-wallet"></i>
+                                <span>Retirer</span>
+                            </button>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <button id="viewTransactionsBtn" class="w-full py-3 px-4 border border-gray-300 rounded-lg text-left flex justify-between items-center hover:bg-gray-50 transition-all">
+                                <div class="flex items-center">
+                                    <i class="fas fa-history text-primary-500 mr-3"></i>
+                                    <span>Historique complet des transactions</span>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="border-t border-gray-200 pt-4 text-center">
+                            <a href="#" class="text-primary-600 hover:underline font-medium">Conditions d'utilisation</a>
+                            <span class="mx-2 text-gray-400">•</span>
+                            <a href="#" class="text-primary-600 hover:underline font-medium">Politique de confidentialité</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Navigation -->
+    <footer id="footerNav" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-around py-3">
+                <button class="footer-tab flex flex-col items-center text-primary-600" data-tab="homeTab">
+                    <div class="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center mb-1">
+                        <i class="fas fa-home text-lg"></i>
+                    </div>
+                    <span class="text-xs">Accueil</span>
+                </button>
+                <button class="footer-tab flex flex-col items-center text-gray-500" data-tab="teamTab">
+                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mb-1">
+                        <i class="fas fa-users text-lg"></i>
+                    </div>
+                    <span class="text-xs">Équipe</span>
+                </button>
+                <button class="footer-tab flex flex-col items-center text-gray-500" data-tab="assistanceTab">
+                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mb-1">
+                        <i class="fas fa-comments text-lg"></i>
+                    </div>
+                    <span class="text-xs">Support</span>
+                </button>
+                <button class="footer-tab flex flex-col items-center text-gray-500" data-tab="profileTab">
+                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mb-1">
+                        <i class="fas fa-user text-lg"></i>
+                    </div>
+                    <span class="text-xs">Profil</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl w-full max-w-md mx-4 overflow-hidden animate-slide-up">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-display font-bold text-gray-900">Connexion</h3>
+                    <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700 transition-all">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label for="loginEmailPhone" class="block text-gray-700 mb-2 font-medium">Email ou Téléphone</label>
+                        <input type="text" id="loginEmailPhone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="loginPassword" class="block text-gray-700 mb-2 font-medium">Mot de passe</label>
+                        <input type="password" id="loginPassword" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" required>
+                        <div class="text-right mt-1">
+                            <a href="#" id="forgotPasswordLink" class="text-sm text-primary-600 hover:underline">Mot de passe oublié?</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" id="rememberMe" class="custom-checkbox mr-2">
+                        <label for="rememberMe" class="text-gray-700 cursor-pointer">Rester connecté</label>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-700 transition-all shadow hover:shadow-md glow-effect mb-4">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Se connecter
+                    </button>
+                    <div class="text-center text-gray-600">
+                        Pas encore de compte? <button type="button" id="switchToRegister" class="text-primary-600 hover:underline font-medium">S'inscrire</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl w-full max-w-md mx-4 overflow-y-auto" style="max-height: 90vh;">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-display font-bold text-gray-900">Inscription</h3>
+                    <button id="closeRegisterModal" class="text-gray-500 hover:text-gray-700 transition-all">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <form id="registerForm">
+                    <div class="mb-4">
+                        <label for="registerName" class="block text-gray-700 mb-2 font-medium">Nom complet</label>
+                        <input type="text" id="registerName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="registerDob" class="block text-gray-700 mb-2 font-medium">Date de naissance</label>
+                        <input type="date" id="registerDob" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="registerPhone" class="block text-gray-700 mb-2 font-medium">Numéro de téléphone</label>
+                        <div class="flex">
+                            <span class="inline-flex items-center px-3 border border-r-0 border-gray-300 bg-gray-100 text-gray-700 rounded-l-lg">+237</span>
+                            <input type="tel" id="registerPhone" class="flex-1 p-3 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" pattern="[0-9]{9}" required>
+                        </div>
+                        <div id="phoneNetwork" class="hidden mt-2 flex items-center">
+                            <img id="networkLogo" src="" alt="" class="h-6 mr-2">
+                            <span id="networkName" class="text-sm text-gray-600"></span>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="registerEmail" class="block text-gray-700 mb-2 font-medium">Email</label>
+                        <input type="email" id="registerEmail" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                    </div>
+                    <div class="mb-4">
+                        <label for="registerPassword" class="block text-gray-700 mb-2 font-medium">Mot de passe</label>
+                        <input type="password" id="registerPassword" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="registerConfirmPassword" class="block text-gray-700 mb-2 font-medium">Confirmer le mot de passe</label>
+                        <input type="password" id="registerConfirmPassword" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="code" class="block text-gray-700 mb-2 font-medium">Code de parrainage (optionnel)</label>
+                        <input type="text" id="code" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex items-start">
+                            <input type="checkbox" id="acceptTerms" class="custom-checkbox mr-2 mt-1" required>
+                            <label for="acceptTerms" class="text-gray-700 cursor-pointer">J'accepte les <a href="#" class="text-primary-600 hover:underline">conditions d'utilisation</a> et la <a href="#" class="text-primary-600 hover:underline">politique de confidentialité</a></label>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex items-start">
+                            <input type="checkbox" id="confirmAge" class="custom-checkbox mr-2 mt-1" required>
+                            <label for="confirmAge" class="text-gray-700 cursor-pointer">Je confirme avoir 18 ans ou plus</label>
+                        </div>
+                    </div>
+                    <div class="mb-4 p-4 bg-gray-100 rounded-lg">
+                        <p class="text-center font-semibold mb-2" id="captchaQuestion">Combien font 3 + 5?</p>
+                        <input type="number" id="captchaAnswer" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Votre réponse" required>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-700 transition-all shadow hover:shadow-md glow-effect">
+                        <i class="fas fa-user-plus mr-2"></i>S'inscrire
+                    </button>
+                    <div class="text-center mt-4 text-gray-600">
+                        Déjà un compte? <button type="button" id="switchToLogin" class="text-primary-600 hover:underline font-medium">Se connecter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl w-full max-w-md mx-4 animate-slide-up">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-display font-bold text-gray-900">Déposer des fonds</h3>
+                    <button id="closeDepositModal" class="text-gray-500 hover:text-gray-700 transition-all">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="depositAmount" class="block text-gray-700 mb-2 font-medium">Montant (FCFA)</label>
+                    <input type="number" id="depositAmount" min="2000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Minimum 2,000">
+                </div>
+                
+                <div class="mb-6">
+                    <p class="font-semibold mb-3">Méthode de paiement:</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button class="payment-method p-4 border-2 border-gray-200 rounded-xl flex flex-col items-center justify-center hover:border-primary-500 transition-all" data-method="mtn">
+                            <img src="https://tse2.mm.bing.net/th/id/OIP.VKxPKInUFbHe6kLIfE57WwHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="MTN Mobile Money" class="h-8 mb-2">
+                            <span class="text-sm text-gray-700">MTN Mobile Money</span>
+                        </button>
+                        <button class="payment-method p-4 border-2 border-gray-200 rounded-xl flex flex-col items-center justify-center hover:border-primary-500 transition-all" data-method="orange">
+                            <img src="https://th.bing.com/th/id/OIP.znL5iNUfaAt4p4WGC0OlAwHaF7?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Orange Money" class="h-8 mb-2">
+                            <span class="text-sm text-gray-700">Orange Money</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <button id="confirmDepositBtn" class="w-full py-3 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-700 transition-all shadow hover:shadow-md glow-effect">
+                    <i class="fas fa-money-bill-wave mr-2"></i>Confirmer le dépôt
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdrawal Modal -->
+    <div id="withdrawModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-2xl w-full max-w-md mx-4 animate-slide-up">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-display font-bold text-gray-900">Retirer des fonds</h3>
+                    <button id="closeWithdrawModal" class="text-gray-500 hover:text-gray-700 transition-all">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="withdrawAmount" class="block text-gray-700 mb-2 font-medium">Montant (FCFA)</label>
+                    <input type="number" id="withdrawAmount" min="3000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="Minimum 3,000">
+                    <p class="text-sm text-gray-500 mt-1">Solde disponible: <span id="availableWithdrawBalance" class="font-medium">0</span> FCFA</p>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="withdrawMethod" class="block text-gray-700 mb-2 font-medium">Méthode de retrait</label>
+                    <select id="withdrawMethod" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        <option value="mtn">MTN Mobile Money</option>
+                        <option value="orange">Orange Money</option>
+                    </select>
+                </div>
+                
+                <button id="confirmWithdrawBtn" class="w-full py-3 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-700 transition-all shadow hover:shadow-md glow-effect">
+                    <i class="fas fa-wallet mr-2"></i>Demander le retrait
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transactions Modal -->
+    <div id="transactionsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden overflow-y-auto backdrop-blur-sm">
+        <div class="bg-white rounded-2xl w-full max-w-4xl mx-4 my-8 animate-slide-up">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-display font-bold text-gray-900">Historique des transactions</h3>
+                    <button id="closeTransactionsModal" class="text-gray-500 hover:text-gray-700 transition-all">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="py-3 text-left text-gray-600 font-medium">Date</th>
+                                <th class="py-3 text-left text-gray-600 font-medium">Type</th>
+                                <th class="py-3 text-left text-gray-600 font-medium">Montant</th>
+                                <th class="py-3 text-left text-gray-600 font-medium">Statut</th>
+                                <th class="py-3 text-left text-gray-600 font-medium">Référence</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fullTransactionsList">
+                            <!-- Full transactions will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden">
+        <div class="bg-primary-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center animate-fade-in">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="notificationMessage">Un utilisateur a retiré 15,000 FCFA</span>
+        </div>
+    </div>
+
+    <!-- Campay SDK -->
+    <script src="https://www.campay.net/sdk/js?app-id=t4-CJchgj_KuCtVpLMKZdXJBuxwi-8tniwJnD_jhPHow1doXKZx4BoSWU2Ib5uLO34wRiAf3gADlFnEAYKdZoQ"></script>
+    
+    <!-- Main JavaScript -->
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize variables
+        let currentUser = null;
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+        let investments = JSON.parse(localStorage.getItem('investments')) || [];
+        let referrals = JSON.parse(localStorage.getItem('referrals')) || [];
+        let notifications = [
+            "Un utilisateur a retiré 15,000 FCFA",
+            "Nouveau retrait de 28,500 FCFA effectué",
+            "45,000 FCFA viennent d'être retirés avec succès",
+            "Retrait de 32,000 FCFA traité",
+            "18,700 FCFA transférés vers un compte Mobile Money"
+        ];
+        
+        // Check login status when page loads
+        checkLoginStatus();
+
+        // Setup event listeners
+        setupEventListeners();
+        
+        // Show random notifications if logged in
+        if (currentUser) {
+            showRandomNotification();
+            setInterval(showRandomNotification, 40000); // Every 50 seconds
+        }
+
+        // Functions
+        function checkLoginStatus() {
+            const loggedInUserId = localStorage.getItem('loggedInUserId');
+            const rememberMe = localStorage.getItem('rememberMe') === 'true';
+            
+            if (loggedInUserId && rememberMe) {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                currentUser = users.find(user => user.id === loggedInUserId);
+                
+                if (currentUser) {
+                    showDashboard();
+                    updateUserBalance();
+                    loadTabContent('homeTab');
+                    
+                    // Show welcome back notification
+                    showNotification(`Content de vous revoir ${currentUser.name}! <span class="wave-hand">👋</span>`);
+                }
+            }
+        }
+        
+        function showDashboard() {
+            document.getElementById('authButtons').classList.add('hidden');
+            document.getElementById('userBalance').classList.remove('hidden');
+            document.getElementById('dashboardContent').classList.remove('hidden');
+            document.getElementById('footerNav').classList.remove('hidden');
+            
+            // Hide all sections except hero
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden');
+            });
+        }
+        
+        function showLandingPage() {
+            document.getElementById('authButtons').classList.remove('hidden');
+            document.getElementById('userBalance').classList.add('hidden');
+            document.getElementById('dashboardContent').classList.add('hidden');
+            document.getElementById('footerNav').classList.add('hidden');
+            
+            // Show all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('hidden');
+            });
+        }
+        
+        function updateUserBalance() {
+            if (!currentUser) return;
+            
+            // Calculate available balance
+            let availableBalance = currentUser.balance || 0;
+            
+            // Check active investment
+            const activeInvestment = investments.find(inv => 
+                inv.userId === currentUser.id && inv.status === 'active'
+            );
+            
+            if (activeInvestment) {
+                availableBalance -= activeInvestment.amount;
+            }
+            
+            document.getElementById('userBalance').querySelector('span:last-child').textContent = `${availableBalance.toLocaleString()} FCFA`;
+            document.getElementById('availableBalance').textContent = `${availableBalance.toLocaleString()} FCFA`;
+            document.getElementById('availableBalanceHeader').textContent = `${availableBalance.toLocaleString()} FCFA`;
+            
+            // Update total invested
+            const totalInvested = investments
+                .filter(inv => inv.userId === currentUser.id)
+                .reduce((sum, inv) => sum + inv.amount, 0);
+            
+            document.getElementById('totalInvested').textContent = `${totalInvested.toLocaleString()} FCFA`;
+            
+            // Update total withdrawn
+            const totalWithdrawn = transactions
+                .filter(tx => tx.userId === currentUser.id && tx.type === 'withdrawal' && tx.status === 'completed')
+                .reduce((sum, tx) => sum + tx.amount, 0);
+            
+            document.getElementById('totalWithdrawn').textContent = `${totalWithdrawn.toLocaleString()} FCFA`;
+            
+            // Update profile info
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profilePhone').textContent = currentUser.phone;
+            document.getElementById('profileEmail').value = currentUser.email || '';
+            
+            // Format join date
+            const joinDate = new Date(currentUser.joinDate);
+            document.getElementById('joinDate').textContent = joinDate.toLocaleDateString('fr-FR', {
+                day: 'numeric', month: 'short', year: 'numeric'
+            });
+            
+            // Update active investment display
+            if (activeInvestment) {
+                const returnAmount = Math.floor(activeInvestment.amount * 0.4);
+                const now = new Date();
+                const endDate = new Date(activeInvestment.endDate);
+                let timeLeft = endDate - now;
+                
+                if (timeLeft <= 0) {
+                    // Investment cycle completed
+                    completeInvestment(activeInvestment.id);
+                    timeLeft = 0;
+                }
+                
+                document.getElementById('activeInvestment').textContent = `${activeInvestment.amount.toLocaleString()} FCFA`;
+                document.getElementById('expectedReturn').textContent = `${returnAmount.toLocaleString()} FCFA`;
+                
+                // Update countdown timer
+                updateCountdownTimer(timeLeft);
+                
+                if (timeLeft > 0) {
+                    const timerInterval = setInterval(() => {
+                        timeLeft -= 1000;
+                        if (timeLeft <= 0) {
+                            clearInterval(timerInterval);
+                            completeInvestment(activeInvestment.id);
+                        }
+                        updateCountdownTimer(timeLeft);
+                    }, 1000);
+                }
+            } else {
+                document.getElementById('activeInvestment').textContent = '0 FCFA';
+                document.getElementById('expectedReturn').textContent = '0 FCFA';
+                document.getElementById('countdownTimer').textContent = '00:00:00';
+            }
+            
+            // Update transactions list
+            updateTransactionsList();
+            
+            // Update referral info
+            updateReferralInfo();
+        }
+        
+        function updateCountdownTimer(ms) {
+            const hours = Math.floor(ms / (1000 * 60 * 60));
+            const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((ms % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdownTimer').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function completeInvestment(investmentId) {
+            const investment = investments.find(inv => inv.id === investmentId);
+            if (!investment) return;
+            
+            // Calculate return
+            const returnAmount = Math.floor(investment.amount * 0.4);
+            
+            // Update investment status
+            investment.status = 'completed';
+            investment.actualReturn = returnAmount;
+            
+            // Update user balance
+            const user = users.find(u => u.id === investment.userId);
+            if (user) {
+                user.balance = (user.balance || 0) + investment.amount + returnAmount;
+            }
+            
+            // Create transaction record
+            const transaction = {
+                id: generateId(),
+                userId: investment.userId,
+                type: 'investment_return',
+                amount: returnAmount,
+                date: new Date().toISOString(),
+                status: 'completed',
+                reference: `INV-${generateId().substring(0, 6)}`
+            };
+            
+            transactions.push(transaction);
+            
+            // Save to localStorage
+            localStorage.setItem('investments', JSON.stringify(investments));
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            
+            // Update UI
+            updateUserBalance();
+            
+            // Show notification
+            showNotification(`Votre investissement de ${investment.amount.toLocaleString()} FCFA a généré ${returnAmount.toLocaleString()} FCFA de gains!`);
+        }
+        
+        function updateTransactionsList() {
+            if (!currentUser) return;
+            
+            const userTransactions = transactions
+                .filter(tx => tx.userId === currentUser.id)
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 5);
+            
+            const transactionsList = document.getElementById('transactionsList');
+            transactionsList.innerHTML = '';
+            
+            userTransactions.forEach(tx => {
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-200';
+                
+                const dateCell = document.createElement('td');
+                dateCell.className = 'py-3';
+                dateCell.textContent = new Date(tx.date).toLocaleDateString('fr-FR');
+                
+                const typeCell = document.createElement('td');
+                typeCell.className = 'py-3';
+                
+                let typeText = '';
+                let amountClass = '';
+                
+                switch(tx.type) {
+                    case 'deposit':
+                        typeText = 'Dépôt';
+                        amountClass = 'text-green-600';
+                        break;
+                    case 'withdrawal':
+                        typeText = 'Retrait';
+                        amountClass = 'text-red-600';
+                        break;
+                    case 'investment':
+                        typeText = 'Investissement';
+                        amountClass = 'text-blue-600';
+                        break;
+                    case 'investment_return':
+                        typeText = 'Gain investissement';
+                        amountClass = 'text-green-600';
+                        break;
+                    case 'referral':
+                        typeText = 'Bonus parrainage';
+                        amountClass = 'text-purple-600';
+                        break;
+                    default:
+                        typeText = tx.type;
+                }
+                
+                typeCell.textContent = typeText;
+                
+                const amountCell = document.createElement('td');
+                amountCell.className = `py-3 font-semibold ${amountClass}`;
+                amountCell.textContent = `${tx.amount.toLocaleString()} FCFA`;
+                
+                const statusCell = document.createElement('td');
+                statusCell.className = 'py-3';
+                
+                let statusText = '';
+                let statusClass = '';
+                
+                switch(tx.status) {
+                    case 'completed':
+                        statusText = 'Complété';
+                        statusClass = 'text-green-600';
+                        break;
+                    case 'pending':
+                        statusText = 'En attente';
+                        statusClass = 'text-yellow-600';
+                        break;
+                    case 'failed':
+                        statusText = 'Échoué';
+                        statusClass = 'text-red-600';
+                        break;
+                    default:
+                        statusText = tx.status;
+                }
+                
+                statusCell.innerHTML = `<span class="${statusClass}">${statusText}</span>`;
+                
+                row.appendChild(dateCell);
+                row.appendChild(typeCell);
+                row.appendChild(amountCell);
+                row.appendChild(statusCell);
+                
+                transactionsList.appendChild(row);
+            });
+        }
+        
+        function updateReferralInfo() {
+            if (!currentUser) return;
+            
+            // Set referral code
+            document.getElementById('referralCode').textContent = currentUser.referralCode || 'ABCD';
+            document.getElementById('referralLink').textContent = `https://avatradecm.com?ref=${currentUser.referralCode || 'ABCD'}`;
+            
+            // Calculate referral earnings
+            const userReferrals = referrals.filter(ref => ref.referrerId === currentUser.id);
+            const activeReferrals = userReferrals.filter(ref => {
+                const hasInvested = investments.some(inv => inv.userId === ref.userId);
+                return hasInvested;
+            });
+            
+            const referralEarnings = userReferrals.reduce((sum, ref) => sum + (ref.earnedAmount || 0), 0);
+            const availableEarnings = activeReferrals.reduce((sum, ref) => sum + (ref.earnedAmount || 0), 0);
+            
+            document.getElementById('referralEarnings').textContent = `${availableEarnings.toLocaleString()} FCFA`;
+            document.getElementById('activeReferrals').textContent = activeReferrals.length;
+            document.getElementById('totalReferralEarnings').textContent = `${referralEarnings.toLocaleString()} FCFA`;
+            
+            // Update referrals list
+            const referralsList = document.getElementById('referralsList');
+            referralsList.innerHTML = '';
+            
+            userReferrals.forEach(ref => {
+                const referredUser = users.find(u => u.id === ref.userId);
+                if (!referredUser) return;
+                
+                const hasInvested = investments.some(inv => inv.userId === ref.userId);
+                
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-200';
+                
+                const nameCell = document.createElement('td');
+                nameCell.className = 'py-3';
+                nameCell.textContent = referredUser.name;
+                
+                const dateCell = document.createElement('td');
+                dateCell.className = 'py-3';
+                dateCell.textContent = new Date(ref.date).toLocaleDateString('fr-FR');
+                
+                const investedCell = document.createElement('td');
+                investedCell.className = 'py-3';
+                investedCell.textContent = hasInvested ? 'Oui' : 'Non';
+                
+                const earningCell = document.createElement('td');
+                earningCell.className = 'py-3 font-semibold text-purple-600';
+                earningCell.textContent = `${(ref.earnedAmount || 0).toLocaleString()} FCFA`;
+                
+                row.appendChild(nameCell);
+                row.appendChild(dateCell);
+                row.appendChild(investedCell);
+                row.appendChild(earningCell);
+                
+                referralsList.appendChild(row);
+            });
+        }
+        
+       function loadTabContent(tabId) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active-tab');
+        tab.classList.add('hidden');
+    });
+    
+    // Show selected tab content
+    const activeTab = document.getElementById(tabId);
+    if (activeTab) {
+        activeTab.classList.add('active-tab');
+        activeTab.classList.remove('hidden');
+    }
+    
+    // Update footer tab icons
+    document.querySelectorAll('.footer-tab').forEach(tab => {
+        if (tab.dataset.tab === tabId) {
+            tab.classList.remove('text-gray-500');
+            tab.classList.add('text-primary-600');
+            tab.querySelector('div').classList.remove('bg-gray-100');
+            tab.querySelector('div').classList.add('bg-primary-100');
+        } else {
+            tab.classList.remove('text-primary-600');
+            tab.classList.add('text-gray-500');
+            tab.querySelector('div').classList.remove('bg-primary-100');
+            tab.querySelector('div').classList.add('bg-gray-100');
+        }
+    });
+}
+
+// Initialize first tab when dashboard loads
+if (currentUser) {
+    loadTabContent('homeTab');
+}
+
+// Setup footer tab click handlers
+document.querySelectorAll('.footer-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        const tabId = this.dataset.tab;
+        loadTabContent(tabId);
+    });
+});
+        
+        function showRandomNotification() {
+            if (!currentUser) return;
+            
+            const randomAmount = Math.floor(Math.random() * (50000 - 2800 + 1)) + 2800;
+            const message = `Un utilisateur a retiré ${randomAmount.toLocaleString()} FCFA`;
+            
+            showNotification(message);
+        }
+        
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notificationMessage');
+            
+            notificationMessage.innerHTML = message;
+            notification.classList.remove('hidden');
+            notification.classList.add('notification-slide');
+            
+            setTimeout(() => {
+                notification.classList.remove('notification-slide');
+                notification.classList.add('hidden');
+            }, 3000);
+        }
+        
+        function setupEventListeners() {
+            // Auth buttons
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                document.getElementById('loginModal').classList.remove('hidden');
+                generateCaptcha();
+            });
+            
+            document.getElementById('registerBtn').addEventListener('click', () => {
+                document.getElementById('registerModal').classList.remove('hidden');
+                generateCaptcha();
+            });
+            
+            document.getElementById('closeLoginModal').addEventListener('click', () => {
+                document.getElementById('loginModal').classList.add('hidden');
+            });
+            
+            document.getElementById('closeRegisterModal').addEventListener('click', () => {
+                document.getElementById('registerModal').classList.add('hidden');
+            });
+            
+            // Switch between login and register
+            document.getElementById('switchToRegister').addEventListener('click', () => {
+                document.getElementById('loginModal').classList.add('hidden');
+                document.getElementById('registerModal').classList.remove('hidden');
+                generateCaptcha();
+            });
+            
+            document.getElementById('switchToLogin').addEventListener('click', () => {
+                document.getElementById('registerModal').classList.add('hidden');
+                document.getElementById('loginModal').classList.remove('hidden');
+                generateCaptcha();
+            });
+            
+            // Login form
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const emailPhone = document.getElementById('loginEmailPhone').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                const rememberMe = document.getElementById('rememberMe').checked;
+
+                // Get users from localStorage
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                
+                // Find user by email or phone
+                const user = users.find(u => {
+                    // Check if login matches email or phone (without +237 prefix)
+                    const emailMatch = u.email === emailPhone;
+                    const phoneMatch = u.phone === `+237${emailPhone}` || u.phone === emailPhone;
+                    
+                    return (emailMatch || phoneMatch) && u.password === password;
+                });
+
+                if (user) {
+                    // Successful login
+                    currentUser = user;
+                    localStorage.setItem('loggedInUserId', user.id);
+                    
+                    if (rememberMe) {
+                        localStorage.setItem('rememberMe', 'true');
+                    } else {
+                        localStorage.removeItem('rememberMe');
+                    }
+                    
+                    document.getElementById('loginModal').classList.add('hidden');
+                    showDashboard();
+                    updateUserBalance();
+                    
+                    // Show welcome notification
+                    showNotification(`Bienvenue ${user.name}! <span class="wave-hand">👋</span>`);
+                } else {
+                    // Failed login
+                    alert('Identifiants incorrects. Veuillez vérifier votre email/téléphone et mot de passe.');
+                    document.getElementById('loginPassword').value = '';
+                }
+            });
+            
+            // Register form
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate form
+                const name = document.getElementById('registerName').value;
+                const dob = document.getElementById('registerDob').value;
+                const phone = document.getElementById('registerPhone').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                const acceptTerms = document.getElementById('acceptTerms').checked;
+                const confirmAge = document.getElementById('confirmAge').checked;
+                const captchaAnswer = parseInt(document.getElementById('captchaAnswer').value);
+                const expectedAnswer = parseInt(document.getElementById('captchaQuestion').textContent.split(' ')[2]);
+                
+                // Validate age (must be 18+)
+                const birthDate = new Date(dob);
+                const ageDiff = Date.now() - birthDate.getTime();
+                const ageDate = new Date(ageDiff);
+                const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+                
+                if (age < 18) {
+                    alert('Vous devez avoir au moins 18 ans pour vous inscrire.');
+                    return;
+                }
+                
+                // Validate phone number
+                if (!phone.match(/^[0-9]{9}$/)) {
+                    alert('Veuillez entrer un numéro de téléphone valide (9 chiffres).');
+                    return;
+                }
+                
+                // Validate password match
+                if (password !== confirmPassword) {
+                    alert('Les mots de passe ne correspondent pas.');
+                    return;
+                }
+                
+                // Validate password length
+                if (password.length < 6) {
+                    alert('Le mot de passe doit contenir au moins 6 caractères.');
+                    return;
+                }
+                
+                // Validate terms and age confirmation
+                if (!acceptTerms || !confirmAge) {
+                    alert('Veuillez accepter les conditions d\'utilisation et confirmer votre âge.');
+                    return;
+                }
+                
+                // Validate captcha
+                if (captchaAnswer === expectedAnswer) {
+                    alert('Réponse au captcha incorrecte. Veuillez réessayer.');
+                    generateCaptcha();
+                    return;
+                }
+                
+                // Check if phone or email already exists
+                const phoneExists = users.some(u => u.phone === `+237${phone}`);
+                const emailExists = email && users.some(u => u.email === email);
+                
+                if (phoneExists) {
+                    alert('Ce numéro de téléphone est déjà enregistré.');
+                    return;
+                }
+                
+                if (emailExists) {
+                    alert('Cet email est déjà enregistré.');
+                    return;
+                }
+                
+                // Create new user
+                const newUser = {
+                    id: generateId(),
+                    name: name,
+                    dob: dob,
+                    phone: `+237${phone}`,
+                    email: email || '',
+                    password: password,
+                    balance: 0,
+                    referralCode: generateReferralCode(),
+                    joinDate: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Check if there's a referral code in URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const referralCode = urlParams.get('ref') || document.getElementById('code').value;
+                
+                if (referralCode) {
+                    const referrer = users.find(u => u.referralCode === referralCode);
+                    if (referrer) {
+                        // Create referral record
+                        const referral = {
+                            id: generateId(),
+                            referrerId: referrer.id,
+                            userId: newUser.id,
+                            date: new Date().toISOString(),
+                            earnedAmount: 0 // Will be updated when user makes first deposit
+                        };
+                        
+                        referrals.push(referral);
+                        localStorage.setItem('referrals', JSON.stringify(referrals));
+                    }
+                }
+                
+                // Log in the new user
+                currentUser = newUser;
+                localStorage.setItem('loggedInUserId', newUser.id);
+                
+                document.getElementById('registerModal').classList.add('hidden');
+                showDashboard();
+                updateUserBalance();
+                
+                // Show welcome notification
+                showNotification(`Bienvenue ${newUser.name}! Votre compte a été créé avec succès. <span class="wave-hand">👋</span>`);
+            });
+            
+            // Phone network detection
+            document.getElementById('registerPhone').addEventListener('input', function() {
+                const phoneNumber = this.value;
+                if (phoneNumber.length === 9) {
+                    const networkInfo = checkNetwork(phoneNumber);
+                    const networkDiv = document.getElementById('phoneNetwork');
+                    
+                    if (networkInfo) {
+                        document.getElementById('networkLogo').src = networkInfo.logo;
+                        document.getElementById('networkName').textContent = networkInfo.name;
+                        networkDiv.classList.remove('hidden');
+                    } else {
+                        networkDiv.classList.add('hidden');
+                    }
+                } else {
+                    document.getElementById('phoneNetwork').classList.add('hidden');
+                }
+            });
+            
+            // Investment calculator
+            document.getElementById('investmentAmount').addEventListener('input', function() {
+                const amount = parseInt(this.value);
+                document.getElementById('currentAmount').textContent = amount.toLocaleString();
+                
+                const returnAmount = Math.floor(amount * 1.4);
+                document.getElementById('returnAmount').textContent = returnAmount.toLocaleString();
+            });
+            
+            document.getElementById('calculatorInvestBtn').addEventListener('click', function() {
+                if (!currentUser) {
+                    document.getElementById('loginModal').classList.remove('hidden');
+                    return;
+                }
+                
+                loadTabContent('homeTab');
+            });
+            
+            document.getElementById('ctaInvestBtn').addEventListener('click', function() {
+                if (!currentUser) {
+                    document.getElementById('registerModal').classList.remove('hidden');
+                    return;
+                }
+                
+                loadTabContent('homeTab');
+            });
+            
+            // Dashboard tabs
+            document.querySelectorAll('.footer-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    loadTabContent(tabId);
+                });
+            });
+            
+            // Investment form
+            document.getElementById('investAmount').addEventListener('input', function() {
+                const amount = parseInt(this.value) || 0;
+                const returnAmount = Math.floor(amount * 0.4);
+                document.getElementById('estimatedReturn').textContent = returnAmount.toLocaleString();
+            });
+            
+            document.getElementById('startInvestmentBtn').addEventListener('click', function() {
+                const amount = parseInt(document.getElementById('investAmount').value);
+                
+                if (isNaN(amount) || amount < 2000) {
+                    alert('Le montant minimum d\'investissement est de 2,000 FCFA.');
+                    return;
+                }
+                
+                // Check available balance
+                const availableBalance = currentUser.balance || 0;
+                
+                // Check if user already has active investment
+                const hasActiveInvestment = investments.some(inv => 
+                    inv.userId === currentUser.id && inv.status === 'active'
+                );
+                
+                if (hasActiveInvestment) {
+                    alert('Vous avez déjà un investissement en cours. Attendez qu\'il soit terminé avant d\'en commencer un nouveau.');
+                    return;
+                }
+                
+                if (availableBalance < amount) {
+                    alert('Solde insuffisant. Veuillez déposer des fonds d\'abord.');
+                    document.getElementById('depositModal').classList.remove('hidden');
+                    return;
+                }
+                
+                // Create investment
+                const now = new Date();
+                const endDate = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
+                
+                const investment = {
+                    id: generateId(),
+                    userId: currentUser.id,
+                    amount: amount,
+                    startDate: now.toISOString(),
+                    endDate: endDate.toISOString(),
+                    status: 'active'
+                };
+                
+                investments.push(investment);
+                localStorage.setItem('investments', JSON.stringify(investments));
+                
+                // Update user balance
+                currentUser.balance = availableBalance - amount;
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Create transaction record
+                const transaction = {
+                    id: generateId(),
+                    userId: currentUser.id,
+                    type: 'investment',
+                    amount: amount,
+                    date: now.toISOString(),
+                    status: 'completed',
+                    reference: `INV-${generateId().substring(0, 6)}`
+                };
+                
+                transactions.push(transaction);
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+                
+                // Update UI
+                updateUserBalance();
+                
+                // Show success message
+                showNotification(`Investissement de ${amount.toLocaleString()} FCFA démarré avec succès!`);
+            });
+            
+            // Deposit modal
+            document.getElementById('depositBtn').addEventListener('click', function() {
+                document.getElementById('depositModal').classList.remove('hidden');
+            });
+            
+            document.getElementById('closeDepositModal').addEventListener('click', function() {
+                document.getElementById('depositModal').classList.add('hidden');
+            });
+            
+            // Withdraw modal
+            document.getElementById('withdrawBtn').addEventListener('click', function() {
+                // Calculate available balance
+                let availableBalance = currentUser.balance || 0;
+                
+                // Check active investment
+                const activeInvestment = investments.find(inv => 
+                    inv.userId === currentUser.id && inv.status === 'active'
+                );
+                
+                if (activeInvestment) {
+                    availableBalance -= activeInvestment.amount;
+                }
+                
+                document.getElementById('availableWithdrawBalance').textContent = availableBalance.toLocaleString();
+                document.getElementById('withdrawModal').classList.remove('hidden');
+            });
+            
+            document.getElementById('closeWithdrawModal').addEventListener('click', function() {
+                document.getElementById('withdrawModal').classList.add('hidden');
+            });
+            
+            // Payment methods
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => {
+                        m.classList.remove('border-primary-500', 'bg-primary-50');
+                    });
+                    this.classList.add('border-primary-500', 'bg-primary-50');
+                });
+            });
+            
+            // Confirm deposit
+            document.getElementById('confirmDepositBtn').addEventListener('click', function() {
+                const amount = parseInt(document.getElementById('depositAmount').value);
+                const method = document.querySelector('.payment-method.border-primary-500')?.dataset.method;
+                
+                if (isNaN(amount) || amount < 2000) {
+                    alert('Le montant minimum de dépôt est de 2,000 FCFA.');
+                    return;
+                }
+                
+                if (!method) {
+                    alert('Veuillez sélectionner une méthode de paiement.');
+                    return;
+                }
+                
+                // Initialize Campay SDK
+                campay.options({
+                    payButtonId: "confirmDepositBtn",
+                    description: `Dépôt AvatradeCM - ${amount} FCFA`,
+                    amount: amount.toString(),
+                    currency: "XAF",
+                    externalReference: `DEP-${generateId().substring(0, 6)}`,
+                    redirectUrl: window.location.href
+                });
+                
+                // Handle successful payment
+                campay.onSuccess = function(data) {
+                    // Update user balance
+                    currentUser.balance = (currentUser.balance || 0) + amount;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    
+                    // Create transaction record
+                    const transaction = {
+                        id: generateId(),
+                        userId: currentUser.id,
+                        type: 'deposit',
+                        amount: amount,
+                        date: new Date().toISOString(),
+                        status: 'completed',
+                        reference: data.reference
+                    };
+                    
+                    transactions.push(transaction);
+                    localStorage.setItem('transactions', JSON.stringify(transactions));
+                    
+                    // Check if this is first deposit for referral bonus
+                    const userDeposits = transactions.filter(tx => 
+                        tx.userId === currentUser.id && tx.type === 'deposit'
+                    );
+                    
+                    if (userDeposits.length === 1) {
+                        // This is first deposit - check for referrer
+                        const referral = referrals.find(ref => ref.userId === currentUser.id);
+                        if (referral) {
+                            const referrer = users.find(u => u.id === referral.referrerId);
+                            if (referrer) {
+                                // Calculate referral bonus (30% of deposit)
+                                const bonusAmount = Math.floor(amount * 0.3);
+                                
+                                // Update referrer's balance
+                                referrer.balance = (referrer.balance || 0) + bonusAmount;
+                                
+                                // Update referral record
+                                referral.earnedAmount = bonusAmount;
+                                referral.depositAmount = amount;
+                                referral.date = new Date().toISOString();
+                                
+                                // Create transaction for referrer
+                                const referralTransaction = {
+                                    id: generateId(),
+                                    userId: referrer.id,
+                                    type: 'referral',
+                                    amount: bonusAmount,
+                                    date: new Date().toISOString(),
+                                    status: 'completed',
+                                    reference: `REF-${generateId().substring(0, 6)}`
+                                };
+                                
+                                transactions.push(referralTransaction);
+                                
+                                // Save all changes
+                                localStorage.setItem('users', JSON.stringify(users));
+                                localStorage.setItem('referrals', JSON.stringify(referrals));
+                                localStorage.setItem('transactions', JSON.stringify(transactions));
+                                
+                                // Show notification to referrer if they're logged in
+                                if (currentUser.id === referrer.id) {
+                                    showNotification(`Bonus de parrainage: ${bonusAmount.toLocaleString()} FCFA reçus!`);
+                                    updateUserBalance();
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Update UI and close modal
+                    updateUserBalance();
+                    document.getElementById('depositModal').classList.add('hidden');
+                    
+                    // Show success message
+                    showNotification(`Dépôt de ${amount.toLocaleString()} FCFA réussi!`);
+                };
+                
+                // Handle payment failure
+                campay.onFail = function(data) {
+                    alert('Le paiement a échoué. Veuillez réessayer.');
+                };
+                
+                // Handle modal close
+                campay.onModalClose = function(data) {
+                    console.log('Payment modal closed');
+                };
+            });
+            
+            // Confirm withdrawal
+            document.getElementById('confirmWithdrawBtn').addEventListener('click', function() {
+                const amount = parseInt(document.getElementById('withdrawAmount').value);
+                const method = document.getElementById('withdrawMethod').value;
+                
+                if (isNaN(amount) || amount < 3000) {
+                    alert('Le montant minimum de retrait est de 3,000 FCFA.');
+                    return;
+                }
+                
+                // Calculate available balance
+                let availableBalance = currentUser.balance || 0;
+                
+                // Check active investment
+                const activeInvestment = investments.find(inv => 
+                    inv.userId === currentUser.id && inv.status === 'active'
+                );
+                
+                if (activeInvestment) {
+                    availableBalance -= activeInvestment.amount;
+                }
+                
+                if (availableBalance < amount) {
+                    alert('Solde disponible insuffisant pour ce retrait.');
+                    return;
+                }
+                
+                // Update user balance
+                currentUser.balance = (currentUser.balance || 0) - amount;
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Create transaction record
+                const transaction = {
+                    id: generateId(),
+                    userId: currentUser.id,
+                    type: 'withdrawal',
+                    amount: amount,
+                    date: new Date().toISOString(),
+                    status: 'pending',
+                    method: method,
+                    reference: `WTH-${generateId().substring(0, 6)}`
+                };
+                
+                transactions.push(transaction);
+                localStorage.setItem('transactions', JSON.stringify(transactions));
+                
+                // Update UI and close modal
+                updateUserBalance();
+                document.getElementById('withdrawModal').classList.add('hidden');
+                
+                // Show success message
+                showNotification(`Demande de retrait de ${amount.toLocaleString()} FCFA envoyée.`);
+            });
+            
+            // View all transactions
+            document.getElementById('viewTransactionsBtn').addEventListener('click', function() {
+                if (!currentUser) return;
+                
+                const userTransactions = transactions
+                    .filter(tx => tx.userId === currentUser.id)
+                    .sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                const fullTransactionsList = document.getElementById('fullTransactionsList');
+                fullTransactionsList.innerHTML = '';
+                
+                userTransactions.forEach(tx => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-gray-200';
+                    
+                    const dateCell = document.createElement('td');
+                    dateCell.className = 'py-3';
+                    dateCell.textContent = new Date(tx.date).toLocaleDateString('fr-FR', {
+                        day: 'numeric', month: 'short', year: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    });
+                    
+                    const typeCell = document.createElement('td');
+                    typeCell.className = 'py-3';
+                    
+                    let typeText = '';
+                    let amountClass = '';
+                    
+                    switch(tx.type) {
+                        case 'deposit':
+                            typeText = 'Dépôt';
+                            amountClass = 'text-green-600';
+                            break;
+                        case 'withdrawal':
+                            typeText = 'Retrait';
+                            amountClass = 'text-red-600';
+                            break;
+                        case 'investment':
+                            typeText = 'Investissement';
+                            amountClass = 'text-blue-600';
+                            break;
+                        case 'investment_return':
+                            typeText = 'Gain investissement';
+                            amountClass = 'text-green-600';
+                            break;
+                        case 'referral':
+                            typeText = 'Bonus parrainage';
+                            amountClass = 'text-purple-600';
+                            break;
+                        default:
+                            typeText = tx.type;
+                    }
+                    
+                    typeCell.textContent = typeText;
+                    
+                    const amountCell = document.createElement('td');
+                    amountCell.className = `py-3 font-semibold ${amountClass}`;
+                    amountCell.textContent = `${tx.amount.toLocaleString()} FCFA`;
+                    
+                    const statusCell = document.createElement('td');
+                    statusCell.className = 'py-3';
+                    
+                    let statusText = '';
+                    let statusClass = '';
+                    
+                    switch(tx.status) {
+                        case 'completed':
+                            statusText = 'Complété';
+                            statusClass = 'text-green-600';
+                            break;
+                        case 'pending':
+                            statusText = 'En attente';
+                            statusClass = 'text-yellow-600';
+                            break;
+                        case 'failed':
+                            statusText = 'Échoué';
+                            statusClass = 'text-red-600';
+                            break;
+                        default:
+                            statusText = tx.status;
+                    }
+                    
+                    statusCell.innerHTML = `<span class="${statusClass}">${statusText}</span>`;
+                    
+                    const referenceCell = document.createElement('td');
+                    referenceCell.className = 'py-3 text-sm text-gray-500';
+                    referenceCell.textContent = tx.reference || '';
+                    
+                    row.appendChild(dateCell);
+                    row.appendChild(typeCell);
+                    row.appendChild(amountCell);
+                    row.appendChild(statusCell);
+                    row.appendChild(referenceCell);
+                    
+                    fullTransactionsList.appendChild(row);
+                });
+                
+                document.getElementById('transactionsModal').classList.remove('hidden');
+            });
+            
+            document.getElementById('closeTransactionsModal').addEventListener('click', function() {
+                document.getElementById('transactionsModal').classList.add('hidden');
+            });
+            
+            // Copy referral code
+            document.getElementById('copyReferralBtn').addEventListener('click', function() {
+                const referralCode = document.getElementById('referralCode').textContent;
+                navigator.clipboard.writeText(referralCode).then(() => {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check mr-2"></i>Copié';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+            
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('loggedInUserId');
+                currentUser = null;
+                showLandingPage();
+            });
+            
+            // Invest now button on hero section
+            document.getElementById('investNowBtn').addEventListener('click', function() {
+                if (!currentUser) {
+                    document.getElementById('registerModal').classList.remove('hidden');
+                } else {
+                    loadTabContent('homeTab');
+                }
+            });
+            
+            // Chat functionality
+            document.getElementById('sendMessageBtn').addEventListener('click', sendMessage);
+            document.getElementById('chatInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            function sendMessage() {
+                const messageInput = document.getElementById('chatInput');
+                const messageText = messageInput.value.trim();
+                
+                if (messageText === '') return;
+                
+                // Create message element
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message mb-3 flex justify-end';
+                
+                messageDiv.innerHTML = `
+                    <div class="flex-shrink-0 ml-3">
+                        <div class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="bg-primary-600 text-white rounded-lg p-3 max-w-xs">
+                        <p class="text-sm">${messageText}</p>
+                        <p class="text-xs text-primary-200 text-right mt-1">${formatTime(new Date())}</p>
+                    </div>
+                `;
+                
+                // Add message to chat
+                document.getElementById('chatMessages').appendChild(messageDiv);
+                
+                // Clear input
+                messageInput.value = '';
+                
+                // Scroll to bottom
+                const chatContainer = document.getElementById('chatMessages');
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                
+                // Simulate support response after a short delay
+                setTimeout(simulateSupportResponse, 1500);
+            }
+
+            function simulateSupportResponse() {
+                const responses = [
+                    "Nous avons bien reçu votre message. Un conseiller vous répondra bientôt.",
+                    "Merci pour votre message. Comment pouvons-nous vous aider davantage?",
+                    "Votre demande est en cours de traitement. Veuillez patienter.",
+                    "Nous comprenons votre préoccupation. Un spécialiste vous contactera sous peu."
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message mb-3 flex';
+                
+                messageDiv.innerHTML = `
+                    <div class="flex-shrink-0 mr-3">
+                        <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center text-primary-600">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-xs">
+                        <p class="text-sm">${randomResponse}</p>
+                        <p class="text-xs text-gray-500 text-right mt-1">Support - ${formatTime(new Date())}</p>
+                    </div>
+                `;
+                
+                document.getElementById('chatMessages').appendChild(messageDiv);
+                
+                // Scroll to bottom
+                const chatContainer = document.getElementById('chatMessages');
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            function formatTime(date) {
+                return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+            }
+            
+            // FAQ accordion
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    if (answer.classList.contains('hidden')) {
+                        answer.classList.remove('hidden');
+                        icon.classList.add('transform', 'rotate-180');
+                    } else {
+                        answer.classList.add('hidden');
+                        icon.classList.remove('transform', 'rotate-180');
+                    }
+                });
+            });
+        }
+        
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('captchaQuestion').textContent = `Combien font ${num1} + ${num2}?`;
+        }
+        
+        function checkNetwork(phoneNumber) {
+            // Normalize phone number
+            const normalized = phoneNumber.replace(/\s+/g, '');
+            
+            // Check if starts with 6
+            if (!normalized.startsWith('6')) {
+                return null;
+            }
+            
+            // Extract relevant parts
+            const after6 = normalized.substring(1); // Everything after 6
+            
+            // MTN prefixes
+            const mtnPrefixes = [
+                '50', '51', '52', '53', '54', 
+                '7', '80', '81', '82', '83'
+            ];
+            
+            // Orange prefixes
+            const orangePrefixes = [
+                '40', '55', '56', '57', '58', '59', 
+                '591', '592', '593', '594', '595',
+                '86', '87', '88', '89', '9'
+            ];
+            
+            // Check MTN
+            for (const prefix of mtnPrefixes) {
+                if (after6.startsWith(prefix)) {
+                    return {
+                        name: 'MTN',
+                        logo: 'https://tse2.mm.bing.net/th/id/OIP.VKxPKInUFbHe6kLIfE57WwHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3'
+                    };
+                }
+            }
+            
+            // Check Orange
+            for (const prefix of orangePrefixes) {
+                if (after6.startsWith(prefix)) {
+                    return {
+                        name: 'Orange',
+                        logo: 'https://th.bing.com/th/id/OIP.znL5iNUfaAt4p4WGC0OlAwHaF7?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3'
+                    };
+                }
+            }
+            
+            return null;
+        }
+        
+        function generateId() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        
+        function generateReferralCode() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let result = '';
+            for (let i = 0; i < 4; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+    });
+</script>
+</body>
+</html>
