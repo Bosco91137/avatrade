@@ -234,24 +234,31 @@
 <body class="font-sans bg-gray-50 text-gray-800 antialiased">
     <!-- Header -->
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="container mx-auto px-4 py-2 sm:py-3 flex justify-between items-center">
+            <!-- Logo Section -->
             <div class="flex items-center space-x-2">
-                <img src="https://tse1.mm.bing.net/th/id/OIP.FyXpBVeNM_hPtQ2P6C56LQAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="AvatradeCM" class="h-10 w-10 rounded-lg object-cover">
-                <span class="text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">AvatradeCM</span>
+                <img src="https://tse1.mm.bing.net/th/id/OIP.FyXpBVeNM_hPtQ2P6C56LQAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" 
+                     alt="AvatradeCM" 
+                     class="h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover">
+                <span class="text-xl sm:text-2xl font-display font-bold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
+                    AvatradeCM
+                </span>
             </div>
-            <div class="flex items-center space-x-4">
-                <div id="authButtons" class="flex space-x-3">
-                    <button id="loginBtn" class="px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all shadow hover:shadow-md flex items-center space-x-2">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <span>Connexion</span>
+
+            <!-- Auth Buttons/Balance Section -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <div id="authButtons" class="flex space-x-1 sm:space-x-3">
+                    <button id="loginBtn" class="px-3 py-1.5 sm:px-5 sm:py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all shadow hover:shadow-md flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base">
+                        <i class="fas fa-sign-in-alt text-xs sm:text-sm"></i>
+                        <span class="hidden xs:inline">Connexion</span>
                     </button>
-                    <button id="registerBtn" class="px-5 py-2.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all shadow hover:shadow-md flex items-center space-x-2">
-                        <i class="fas fa-user-plus"></i>
-                        <span>Inscription</span>
+                    <button id="registerBtn" class="px-3 py-1.5 sm:px-5 sm:py-2.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-all shadow hover:shadow-md flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base">
+                        <i class="fas fa-user-plus text-xs sm:text-sm"></i>
+                        <span class="hidden xs:inline">Inscription</span>
                     </button>
                 </div>
-                <div id="userBalance" class="hidden items-center bg-primary-50 px-4 py-2 rounded-lg">
-                    <span class="font-medium text-primary-800 mr-2">Solde:</span>
+                <div id="userBalance" class="hidden items-center bg-primary-50 px-2 py-1 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm">
+                    <span class="font-medium text-primary-800 mr-1 sm:mr-2">Solde:</span>
                     <span class="font-bold text-primary-700">0 XAF</span>
                 </div>
             </div>
